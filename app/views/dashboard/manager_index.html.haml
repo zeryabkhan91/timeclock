@@ -1,0 +1,25 @@
+.container
+  %h1 Manager Dashboard
+
+  .col-md-12
+    %table.table.table-bordered
+      %thead
+        %th ID
+        %th Worker Name
+        %th Date of Birth
+        %th Unique Identifer
+        %th Total Time
+        %th Status
+        %th
+
+      %tbody
+        - @workers.each do |worker|
+          %tr
+            %td= worker.id
+            %td= worker.name
+            %td= worker.date_of_birth.strftime("%B %d %Y")
+            %td= worker.identifier
+            %td= worker.logged_time
+            %td{ class: "#{worker.active? ? 'bg-success' : 'bg-danger' }" }
+              = worker.status
+
