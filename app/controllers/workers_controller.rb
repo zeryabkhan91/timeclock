@@ -12,6 +12,24 @@ class WorkersController < ApplicationController
     end
   end
 
+  def confirm_worker
+    token = params[:token]
+    if token.present?
+      worker = Worker.find_by_identifier(token)
+      if worker&.id?
+        render json: {id: worker.id}
+      else 
+        render json: {
+          errors: {
+            full_messages: "Worker token is invalid"
+          },
+          type: "error"
+        }, status: :unprocessable_entity
+      end
+    end
+
+  end
+
   private
 
   def worker_params
