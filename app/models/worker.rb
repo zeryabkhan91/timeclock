@@ -1,7 +1,8 @@
 class Worker < ApplicationRecord
 
   before_create :generate_token
-
+  
+  has_many :time_logs, class_name: 'TimeLog', foreign_key: 'worker_id'
 
   private
 
