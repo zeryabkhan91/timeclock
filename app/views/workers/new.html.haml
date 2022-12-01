@@ -1,0 +1,15 @@
+.container
+  %h1 Worker Registration Form
+
+  .col-md-6
+    = form_for @worker, url: workers_path, method: "POST" do |f|
+      .form-group
+        = f.label :name
+        = f.text_field :name, class: 'form-control'
+
+      .form-group
+        = f.label :date_of_birth
+        = f.text_field :date_of_birth, class: 'form-control datepicker'
+
+      .text-right
+        = f.submit 'Create worker Profile', as: :button, class: 'btn btn-primary'
