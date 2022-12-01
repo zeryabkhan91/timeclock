@@ -4,6 +4,8 @@ class Worker < ApplicationRecord
   
   has_many :time_logs
 
+  enum :status, [:active, :inactive]
+
   def logged_time(start_date = nil, end_date = nil)
     logs = self.time_logs
     logs = logs.where('start_time > ?', start_date.beginning_of_day) if start_date.present?
