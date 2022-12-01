@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "dashboard#index"
+  get "/manager_dashboard", to: "dashboard#manager_index"
 
   resources :workers, only: [:new, :create] 
   resources :time_logs, only: [:new, :create]
