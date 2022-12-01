@@ -1,3 +1,6 @@
-%h1 Dashboard
-= link_to "Register", new_worker_path
-= link_to "Timeclock", new_time_log_path
+.container
+  %h1 Dashboard
+  .col-sm-12.text-center
+    = link_to "Register", new_worker_path, class: "btn btn-outline-primary btn-lg"
+  .col-sm-12.text-center.mt-5
+    = link_to "Timeclock", new_time_log_path, class: "btn btn-outline-danger btn-lg"
