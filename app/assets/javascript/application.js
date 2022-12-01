@@ -38,6 +38,8 @@ $(document).ready(function(){
   $("body").on('click', '#punch_in', function(){
     $('#countdown_clock').removeClass('d-none');
 
+    window.localStorage.setItem("start_time", Date());
+
     interval = setInterval(function(){
       output = $('#output');
       time_in_seconds += (delay/1000.0);
@@ -48,5 +50,26 @@ $(document).ready(function(){
 
   $("body").on("click", "#punch_out", function(){
     clearInterval(interval);
+    window.localStorage.setItem("end_time", Date());
+    
+    $.ajax({
+      url: '/time_logs',
+      type: 'POST',
+      data: {
+        'time_log': {
+          'worker_id': window.localStorage.getItem("worker_id"), 
+          'start_time': window.localStorage.getItem("start_time"), 
+          'end_time': window.localStorage.getItem("end_time") 
+        }
+      },
+      success: (response) => {
+
+      },
+      error: (response) => {
+        console.log(response);
+        return
+      }
+    });
+
   });
 })
