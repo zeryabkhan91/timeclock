@@ -8,6 +8,7 @@ class WorkersController < ApplicationController
     if @worker.save
       redirect_to root_path, notice: "Profile Created Successfully ID: #{@worker.identifier}"
     else
+      render :new, error: @worker.errors.full_messages.to_sentence
     end
   end
 
