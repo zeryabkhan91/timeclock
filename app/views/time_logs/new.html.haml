@@ -1,49 +1,32 @@
 .container
+  %h1 TimeClock
   .div.confirm_selection
-    %h3 Enter your ID below to proceed
     .col-md-6
+      %label Add unique identifide
       %input.form-control{:type => "text", :value => "", :id => "token_id"}/
-    .col-md-6
-      %button{:id => 'confirm'}
+
+    .col-md-6.text-right.mt-3
+      %button{id: 'confirm', class: "btn btn-primary text-right"}
         %h6.mb-0 Confirm
 
-  .div.timer_show
+
+  .div.timer_section.d-none
     .col-md-6.mb-3
-      %button{:id => 'punch_in'}
-        %h6.mb-0 Punch In 
+      .form-group
+        %button{id: 'punch_in', class: 'form-control'}
+          %h6.mb-0 Punch In
+
+      #countdown_clock.d-none
+        %p{id: 'countdown_clock'}
+          Elapsed Time:
+          %span{ id: 'output' }
+            00:00:00
+
+        .form-group
+          %button{id: 'punch_out', class: 'btn btn-danger'}
+            %h6.mb-0 Punch Out
+
+  .col-md-6
+    = link_to "Go Back Home", root_url, class: "btn btn-secondary"
 
   .div.clock_show
-
-
-  
-:javascript
-  $(document).ready(function(){
-    $('#punch_in').hide()
-
-    $("#confirm").click(function(){
-      console.log($('#token_id').val())
-      if ($('#token_id').val().length > 0){
-      	$.ajax({
-          url: '/workers/confirm_worker',
-          type: 'GET',
-          data: { 'token': $('#token_id').val() },
-          success: (response) => {
-            console.log(response.id)
-            $('.confirm_selection').hide()
-            $('#punch_in').show()
-            
-          },
-          error: (response) => {
-            console.log(response);
-            return
-          }
-        });
-      }
-    });
-
-    $("#punch_in").click(function(){
-      
-    });
-
-  });
-
